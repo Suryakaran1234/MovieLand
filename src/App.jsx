@@ -5,7 +5,7 @@ import MovieCard from './MovieCard';
 
 // 68fe8ac3
 
-const API_URL = 'http://www.omdbapi.com?apikey=761c4dc2';
+const API_URL = `https://www.omdbapi.com?apikey=${process.env.REACT_APP_OMDB_API_KEY}`;
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -33,10 +33,14 @@ const App = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <img src={SearchIcon} alt='search' onClick={() => searchMovies(searchTerm)} />
+        <img
+          src={SearchIcon}
+          alt='search'
+          onClick={() => searchMovies(searchTerm)}
+        />
       </div>
 
-      {movies.length > 0 ? (
+      {movies?.length > 0 ? (
         <div className='container'>
           {movies.map((movie, index) => (
             <MovieCard movie={movie} key={index} />
